@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {UserServiceClient} from '../services/user.service.client';
+import {PersonServiceClient} from '../services/person.service.client';
 let selfReference
 
 @Component({
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  constructor(private router: Router, private userService: UserServiceClient) {
+  constructor(private router: Router, private userService: PersonServiceClient) {
     selfReference = this;
   }
 
