@@ -11,24 +11,24 @@ let selfReference
 
 export class LoginComponent implements OnInit {
 
-  username;
-  password;
-  login(username, password) {
-    console.log([username, password]);
-    this.userService.findUserByCredentials(username, password)
-      .then(function (user) {
-        if (user == null) {
+  logn;
+
+  login(logn) {
+    console.log([logn]);
+    this.personService.findPersonByLogin(logn)
+      .then(function (logn) {
+        if (logn == null) {
           alert('Uth oh, it seems your username or password doesn\'t work!' +
             ' Please, try again.');
         } else {
-          selfReference.userService.login(username, password)
+          selfReference.personService.login(logn)
             .then(() => selfReference.router.navigate( ['profile']));
         }
       });
 
   }
 
-  constructor(private router: Router, private userService: PersonServiceClient) {
+  constructor(private router: Router, private personService: PersonServiceClient) {
     selfReference = this;
   }
 
