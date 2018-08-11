@@ -22,7 +22,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserModule,
     routing
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
