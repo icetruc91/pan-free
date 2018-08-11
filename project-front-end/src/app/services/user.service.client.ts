@@ -1,16 +1,19 @@
-export class SectionServiceClient {
+import {Injectable} from "@angular/core";
 
-  SECTION_URL = 'https://webdev-nodejs-madness.herokuapp.com/api/course/COURSE_ID/section';
-  createSection(courseId, name, seats) {
-    const section = {
-      name: name,
-      seats: seats,
-      courseId: courseId
+@Injectable()
+export class UserServiceClient {
+
+
+
+
+  login(username, password) {
+    const credentials = {
+      username: username,
+      password: password
     };
-
-    return fetch(this.SECTION_URL.replace('COURSE_ID', courseId), {
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/login', {
       method: 'post',
-      body: JSON.stringify(section),
+      body: JSON.stringify(credentials),
       credentials: 'include',
       headers: {
         'content-type': 'application/json'
@@ -18,75 +21,78 @@ export class SectionServiceClient {
     });
   }
 
-  findSectionsforCourse(courseId) {
-    return fetch(this.SECTION_URL.replace('COURSE_ID', courseId))
+  findUserByCredentials(username, password) {
+    return fetch( 'https://webdev-nodejs-madness.herokuapp.com/api/user/'+username+'/username/'+password+'/password')
+      .then(function (response) {
+        if (response.status > 400) {
+          return null;
+        }
+        return response.json();
+      });
+  }
+
+  profile() {
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/profile', {
+      credentials: 'include'
+    })
       .then(response => response.json());
   }
 
-  updateSection(section) {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + section._id;
-    return fetch(url, {
+
+
+
+  updateProfile(user) {
+    console.log(user);
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/updateProfile', {
+      credentials: 'include',
       method: 'put',
-      credentials: 'include',
-      body: JSON.stringify(section),
+      body: JSON.stringify(user),
       headers: {
         'content-type': 'application/json'
       }
     }).then(response => response.json());
   }
 
-  enrollStudentInSection(sectionId) {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + sectionId + '/enrollment';
-    return fetch(url, {
+  findUserByUsername(username) {
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/user/' + username + '/username')
+      .then(function (response) {
+        if (response.status > 400) {
+          return null;
+        }
+        return response.json();
+      });
+  }
+
+
+  createUser(username, password) {
+    const user = {
+      username: username,
+      password: password
+    };
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/register/', {
+      body: JSON.stringify(user),
+      credentials: 'include',
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
+  logout() {
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/logout/', {
       method: 'post',
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
-  }
-
-  findEnrollment(sectionId) {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + sectionId + '/enrollment';
-    return fetch(url, {
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/json'
-      }
-    }).then(response => response.json());
-  }
-
-  unenrollStudentFromSection(enrollment) {
-    const sectionId = enrollment[0].sectionId;
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + sectionId + '/unenrollment';
-    return fetch(url, {
-      method: 'delete',
-      credentials: 'include',
-    });
-  }
-
-  deleteSection(section) {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + section._id;
-    return fetch(url, {
-      method: 'delete',
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
-  }
-
-  getSectionById(sectionId) {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/section/' + sectionId;
-    return fetch(url, {
       credentials: 'include'
-    }).then(response => response.json());
+    });
   }
 
-  findSectionsForStudent() {
-    const url = 'https://webdev-nodejs-madness.herokuapp.com/api/student/section';
-    return fetch(url, {
+  findUserById(userId) {
+    return fetch('https://webdev-nodejs-madness.herokuapp.com/api/user/' + userId, {
       credentials: 'include'
-    }).then(response => response.json());
+    })
+      .then(response => response.json());
   }
+
+
+
 }
