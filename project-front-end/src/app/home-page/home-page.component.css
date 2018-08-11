@@ -12,9 +12,15 @@
 }
 
 .welcome{
+   font-weight: bold;
+   color: #71dd8a;
+   font-size: 64px;
+ }
+
+.welcome2 {
   font-weight: bold;
   color: #71dd8a;
-  font-size: 64px;
+  padding-top: 5%;
 }
 
 .search {
