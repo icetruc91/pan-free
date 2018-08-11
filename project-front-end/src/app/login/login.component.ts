@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import {Router} from '@angular/router';
-// import {UserServiceClient} from '../services/user.service.client';
-// let selfReference
+
+import {Router} from '@angular/router';
+import {PersonServiceClient} from '../services/person.service.client';
+let selfReference
+
 
 @Component({
   selector: 'app-login',
@@ -28,11 +30,11 @@ export class LoginComponent implements OnInit {
   //
   // }
 
-  constructor(
-    // private router: Router,
-    // private userService: UserServiceClient
-  ) {
-    // selfReference = this;
+
+
+  constructor(private router: Router, private userService: PersonServiceClient) {
+    selfReference = this;
+
   }
 
   ngOnInit() {
