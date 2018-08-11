@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserServiceClient} from '../services/user.service.client';
+let selfReference
 
 @Component({
   selector: 'app-login',
@@ -20,15 +21,15 @@ export class LoginComponent implements OnInit {
           alert('Uth oh, it seems your username or password doesn\'t work!' +
             ' Please, try again.');
         } else {
-          this.userService.login(username, password)
-            .then(() => this.router.navigate( ['profile']));
+          selfReference.userService.login(username, password)
+            .then(() => selfReference.router.navigate( ['profile']));
         }
       });
 
   }
 
   constructor(private router: Router, private userService: UserServiceClient) {
-    // selfReference = this;
+    selfReference = this;
   }
 
   ngOnInit() {
