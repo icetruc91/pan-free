@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -8,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {routing} from "./app.routing";
 import { NavbarComponent } from './navbar/navbar.component';
+import {PersonServiceClient} from "./services/person.service.client";
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   imports: [
     BrowserModule,
-    routing
+    routing,
+    FormsModule
+
   ],
   providers: [
-
+    PersonServiceClient
   ],
   bootstrap: [AppComponent]
 })
