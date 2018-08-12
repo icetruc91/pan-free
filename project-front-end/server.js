@@ -2,9 +2,9 @@ const express = require('express');
 const path = require('path');
 const app = express();
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/pan-free-app'));
+app.use(express.static(__dirname + './dist/cs5200_front_end'));
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join('./dist/pan-free-app/index.html'));
+  res.sendFile(path.join(__dirname + './dist/cs5200_front_end/index.html'));
 });
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 4200);
